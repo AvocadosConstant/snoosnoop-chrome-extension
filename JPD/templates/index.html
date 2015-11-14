@@ -1,0 +1,71 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>------</title>
+    {% include 'includes/head.html' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/splash.css') }}" />
+    <link href="http://fonts.googleapis.com/css?family=Exo+2:100" rel="stylesheet" type="text/css">
+  </head>
+  <body class="valign-wrapper">
+    <div class="container valign center-align">
+      <div class="row">
+        <div class="col s12">
+          <h1 class="logo">Our Sweet Site</h1>
+          <h3>Subtitle Goes Here </h3>
+          <h3> Hello {{ noun }} </h3>
+          <a href="/word" > click </a>
+          <script>
+          $(document).ready(function()
+          {
+            var socket = io.connect('http://' + document.domain + ':' + location.port + '/test');
+            socket.on('my response', function(msg) {
+                $('#log').append('<p>Received: ' + msg.data + '</p>');
+            });
+            $('form#emit').submit(function(event) {
+                socket.emit('my event', {data: $('#emit_data').val()});
+                return false;
+            });
+            $('form#broadcast').submit(function(event) {
+                socket.emit('my broadcast event', {data: $('#broadcast_data').val()});
+                return false;
+            });
+        });
+          </script>
+              <h2>Send:</h2>
+    <form id="emit" method="POST" action='#'>
+        <input type="text" name="emit_data" id="emit_data" placeholder="Message">
+        <input type="submit" value="Echo">
+    </form>
+    <form id="broadcast" method="POST" action='#'>
+        <input type="text" name="broadcast_data" id="broadcast_data" placeholder="Message">
+        <input type="submit" value="Broadcast">
+    </form>
+    <form id="join" method="POST" action='#'>
+        <input type="text" name="join_room" id="join_room" placeholder="Room Name">
+        <input type="submit" value="Join Room">
+    </form>
+    <form id="leave" method="POST" action='#'>
+        <input type="text" name="leave_room" id="leave_room" placeholder="Room Name">
+        <input type="submit" value="Leave Room">
+    </form>
+    <form id="send_room" method="POST" action='#'>
+        <input type="text" name="room_name" id="room_name" placeholder="Room Name">
+        <input type="text" name="room_data" id="room_data" placeholder="Message">
+        <input type="submit" value="Send to Room">
+    </form>
+    <form id="close" method="POST" action="#">
+        <input type="text" name="close_room" id="close_room" placeholder="Room Name">
+        <input type="submit" value="Close Room">
+    </form>
+    <form id="disconnect" method="POST" action="#">
+        <input type="submit" value="Disconnect">
+    </form>
+    <h2>Receive:</h2>
+    <div id="log"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
