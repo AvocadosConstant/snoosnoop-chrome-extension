@@ -1,0 +1,28 @@
+{
+  "manifest_version": 2,
+
+  "name": "SnooSnoop",
+  "description": "This extension allows ease of access to the SnoopSnoo Website",
+  "version": "1.0",
+  "author" : "gabeochoa",
+
+  "content_scripts": [
+    {
+      "matches": ["http://*.reddit.com/*"],
+      "js": ["core.js"],
+      "run_at": "document_end",
+      "all_frames": true
+    }
+  ],
+  "icons": 
+  { 
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png" },
+  "permissions": [
+    "activeTab",
+    "contextMenus",
+    "tabs" 
+  ],
+  "background": {"page": "background.html"}
+}
