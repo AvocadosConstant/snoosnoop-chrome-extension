@@ -3,7 +3,7 @@
 
   "name": "SnooSnoop",
   "description": "This extension allows ease of access to the SnoopSnoo Website",
-  "version": "1.0",
+  "version": "0.0.0.5",
   "author" : "gabeochoa",
 
   "content_scripts": [
