@@ -1,16 +1,12 @@
 function snoopsnoo(info) {
-    console.log(info.linkUrl);
-    var searchstring = info.linkUrl;
-    /*if(searchstring.indexOf("/u/" == -1)) {
-      searchstring = "/u/" + searchstring;
-    }*/
-    
-    searchstring = searchstring.replace(/https:\/\/www\.reddit\.com\/user\//, '');
-    alert(searchstring);
-    chrome.tabs.create({url: "http://snoopsnoo.com/u/" + searchstring})
+    var user = info.linkUrl;
+    if(user.match(/https:\/\/www\.reddit\.com\/user\/+\w+/) == null) return;
+    user = user.replace(/https:\/\/www\.reddit\.com\/user\//, '');
+    chrome.tabs.create({url: "http://snoopsnoo.com/u/" + user})
 }
 
 chrome.contextMenus.create({
     title: "Search SnoopSnoo For User", 
     contexts:["link"], 
-    onclick: snoopsnoo});
+    onclick: snoopsnoo
+});
