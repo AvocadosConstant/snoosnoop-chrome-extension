@@ -1,0 +1,36 @@
+<!doctype html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>------</title>
+    {% include 'includes/head.html' %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/splash.css') }}" />
+    <link href="http://fonts.googleapis.com/css?family=Exo+2:100" rel="stylesheet" type="text/css">
+  </head>
+  <body class="valign-wrapper">
+    <div class="container valign center-align">
+      <div class="row">
+        <div class="col s12">
+          <h1 class="logo">Capitol Perception</h1>
+          <!--<h3>Subtitle Goes Here </h3>!-->
+
+          <form action="JavaScript:handleClick()">
+                        <input type="text" id="search" style='font-size: 50px; text-align: center; color: #FFFFFF;' value = 'First Last'/>
+                    </form>
+
+        <script>
+            $(document).ready(function() {
+                $('.button-collapse').sideNav();
+            });
+             function handleClick()
+            {
+                var term = document.getElementById('search').value;
+                window.location.href = '/search?name='+term;
+            }
+        </script>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
